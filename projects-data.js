@@ -22,8 +22,7 @@ const PROJECTS_DATA = [
   {
     id: 3,
     title: "Teacher Job Platform",
-    description: "A modern e-learning platform with course management, progress tracking, video lessons, quizzes, and certificate generation. Dark-mode UI with smooth animations.",
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
+    description: "A platform for teachers to find job vacancies in Kenya, with features for searching, filtering, and applying to teaching positions. Built with Django and React.",
     technologies: ["Django","React", "JavaScript", "CSS3", "SQLite", "Lipia-Api"],
     github: "https://github.com/oscarnyamosi1/kenya_teaching_vacancies/",
     demo: "https://kenyateachers.vercel.app",
