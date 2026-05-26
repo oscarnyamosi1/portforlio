@@ -1,0 +1,108 @@
+Create a modern, premium, mobile-first personal portfolio website based on the uploaded HTML design file. Preserve the dark futuristic aesthetic, glassmorphism effects, blue/purple gradients, glowing UI, and overall visual identity from the uploaded file, but fully optimize and restructure it into a professional production-ready portfolio.
+
+Requirements:
+
+Make the entire website fully responsive and mobile friendly on:
+phones
+tablets
+desktops
+Fix ALL broken links, buttons, anchors, navigation items, and interactions.
+Every navbar item must scroll smoothly to its section.
+Add proper hover animations and transitions.
+Ensure all buttons are functional.
+
+Core Sections:
+
+Hero Section
+About Me
+Skills
+Projects
+Education
+Experience
+Contact
+Footer
+
+Portfolio Projects System:
+
+Add a dedicated “Projects” page.
+Add an admin-like upload section/page where I can easily add new projects later without editing large amounts of code.
+The project system should support:
+project image
+title
+description
+technologies used
+GitHub link
+live demo link
+featured badge
+Make the projects layout visually similar in quality to:
+benkiz.vercel.app
+Use beautiful responsive project cards with glow effects and glassmorphism.
+
+Project Upload Experience:
+
+Create a clean “Add Project” interface or JSON-based system where I can easily paste new project details.
+New projects should automatically render on the portfolio page.
+Include placeholder demo projects.
+
+Design Requirements:
+
+Preserve the futuristic dark theme.
+Use:
+dark navy background
+blue neon glow
+subtle purple gradients
+glass blur cards
+animated background orbs
+smooth scrolling
+modern typography
+Add loading animations and section reveal animations.
+Add a professional cursor or hover glow effect.
+Keep the UI minimal, clean, and premium.
+
+Technical Requirements:
+
+Use clean HTML, CSS, and JavaScript OR React if better.
+Organize code properly into reusable sections/components.
+Optimize performance and responsiveness.
+Use semantic HTML and SEO-friendly structure.
+Add favicon support.
+Add meta tags and Open Graph tags.
+Add smooth scroll behavior.
+Make all external links open correctly in new tabs.
+
+Contact Section:
+
+Include:
+phone number: 0795404843
+email placeholder
+GitHub placeholder
+LinkedIn placeholder
+Add clickable buttons:
+call
+email
+WhatsApp
+
+Extra Features:
+
+Add dark/light mode toggle.
+Add downloadable CV button.
+Add animated skills progress bars.
+Add typing animation in hero section.
+Add project filtering by technology.
+Add “featured projects” section.
+Add testimonials placeholder section.
+Add a modern footer.
+
+Deployment:
+
+Make the project easy to deploy on:
+Replit
+Vercel
+Netlify
+
+Important:
+
+Keep the original uploaded design style and improve it instead of replacing it completely.
+Ensure spacing, responsiveness, and typography are polished professionally.
+Make the final portfolio feel like a premium developer brand website.
+Ensure all code is clean, beginner-friendly, and easy to update later.

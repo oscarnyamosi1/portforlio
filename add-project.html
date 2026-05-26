@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Project — Oscar Nyamosi Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0f1e; --bg2: #0d1525; --surface: #111827; --card: #141d2f;
+      --border: #1e2d45; --fg: #e8edf5; --fg-muted: #8b9ab2;
+      --primary: #38bdf8; --secondary: #6366f1; --success: #10b981;
+      --danger: #f43f5e; --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--fg); min-height: 100vh; padding: 0; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background: rgba(13,21,37,0.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .header-logo { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; }
+    .logo-icon { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #38bdf8, #6366f1); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #0a0f1e; }
+    .back-link { font-size: 14px; color: var(--fg-muted); display: flex; align-items: center; gap: 6px; }
+    .back-link:hover { color: var(--primary); text-decoration: none; }
+
+    .page { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+    .page-title { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
+    .page-subtitle { font-size: 15px; color: var(--fg-muted); margin-bottom: 40px; }
+
+    .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+    .tab { padding: 10px 20px; border-radius: 8px 8px 0 0; font-size: 14px; font-weight: 600; cursor: pointer; color: var(--fg-muted); border: none; background: none; transition: color 0.2s; }
+    .tab.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .form-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 13px; font-weight: 600; color: var(--fg-muted); }
+    input, textarea, select {
+      background: #0d1525; border: 1px solid var(--border); border-radius: 10px;
+      padding: 11px 14px; font-size: 14px; color: var(--fg); outline: none;
+      font-family: inherit; transition: border-color 0.2s;
+      width: 100%;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--primary); }
+    textarea { resize: vertical; min-height: 100px; }
+    .form-hint { font-size: 12px; color: var(--fg-muted); margin-top: 4px; }
+    .toggle-wrap { display: flex; align-items: center; gap: 12px; }
+    .toggle { position: relative; width: 44px; height: 24px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; inset: 0; border-radius: 12px;
+      background: var(--border); cursor: pointer; transition: background 0.2s;
+    }
+    .toggle-slider::before {
+      content: ''; position: absolute; width: 18px; height: 18px; border-radius: 50%;
+      background: white; top: 3px; left: 3px; transition: transform 0.2s;
+    }
+    .toggle input:checked + .toggle-slider { background: var(--primary); }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+    .btn { padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+    .btn-primary-full { background: linear-gradient(135deg, #38bdf8, #6366f1); color: #0a0f1e; box-shadow: 0 4px 16px rgba(56,189,248,0.3); width: 100%; margin-top: 24px; font-size: 15px; padding: 14px; }
+    .btn-primary-full:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,189,248,0.4); }
+    .btn-danger { background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); color: var(--danger); padding: 7px 14px; font-size: 13px; border-radius: 8px; }
+    .btn-danger:hover { background: rgba(244,63,94,0.2); }
+
+    #toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--success); color: white; padding: 14px 28px; border-radius: 12px;
+      font-size: 14px; font-weight: 600; z-index: 100; transition: transform 0.3s;
+      box-shadow: 0 8px 24px rgba(16,185,129,0.4);
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    #toast.error { background: var(--danger); box-shadow: 0 8px 24px rgba(244,63,94,0.4); }
+
+    .projects-list { display: flex; flex-direction: column; gap: 16px; }
+    .project-list-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px; display: flex; gap: 16px; align-items: center;
+    }
+    .project-list-img { width: 80px; height: 56px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: var(--border); }
+    .project-list-info { flex: 1; min-width: 0; }
+    .project-list-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .project-list-techs { font-size: 12px; color: var(--fg-muted); }
+    .project-list-source { font-size: 12px; color: var(--primary); margin-top: 2px; }
+    .project-list-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--fg-muted); }
+    .empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .json-section { margin-top: 24px; }
+    .json-block {
+      background: #060d18; border: 1px solid var(--border); border-radius: 10px;
+      padding: 20px; font-family: 'Courier New', monospace; font-size: 13px;
+      color: #7dd3fc; line-height: 1.6; overflow-x: auto; white-space: pre-wrap;
+    }
+    .json-instructions { background: rgba(56,189,248,0.05); border: 1px solid rgba(56,189,248,0.15); border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+    .json-instructions h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--primary); }
+    .json-instructions ol { padding-left: 20px; font-size: 14px; color: var(--fg-muted); line-height: 2; }
+    .json-instructions code { background: rgba(56,189,248,0.1); color: var(--primary); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .project-list-item { flex-direction: column; align-items: flex-start; }
+      .project-list-img { width: 100%; height: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">
+    <div class="logo-icon">ON</div>
+    Portfolio Admin
+  </div>
+  <a href="/" class="back-link">← Back to Portfolio</a>
+</header>
+
+<div class="page">
+  <div class="page-title">Manage Projects</div>
+  <div class="page-subtitle">Add, view, and remove portfolio projects. Projects added here are saved in your browser and displayed on the portfolio.</div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="add">➕ Add Project</button>
+    <button class="tab" data-tab="manage">📋 Manage Projects</button>
+    <button class="tab" data-tab="json">📄 JSON Guide</button>
+  </div>
+
+  <!-- ADD TAB -->
+  <div class="tab-panel active" id="tab-add">
+    <div class="form-card">
+      <form id="projectForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="title">Project Title *</label>
+            <input type="text" id="title" placeholder="e.g. CloudOps Dashboard" required />
+          </div>
+          <div class="form-group">
+            <label for="image">Image URL</label>
+            <input type="url" id="image" placeholder="https://..." />
+            <div class="form-hint">Paste a direct image URL (Unsplash, Imgur, etc.)</div>
+          </div>
+          <div class="form-group full">
+            <label for="description">Description *</label>
+            <textarea id="description" placeholder="Describe what the project does, what problem it solves, and key features..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="github">GitHub URL *</label>
+            <input type="url" id="github" placeholder="https://github.com/you/project" required />
+          </div>
+          <div class="form-group">
+            <label for="demo">Live Demo URL</label>
+            <input type="url" id="demo" placeholder="https://yourproject.vercel.app" />
+          </div>
+          <div class="form-group full">
+            <label for="technologies">Technologies (comma-separated) *</label>
+            <input type="text" id="technologies" placeholder="Django, React, PostgreSQL, Docker, AWS" required />
+            <div class="form-hint">Separate each technology with a comma</div>
+          </div>
+          <div class="form-group">
+            <label>Mark as Featured</label>
+            <div class="toggle-wrap">
+              <label class="toggle">
+                <input type="checkbox" id="featured" />
+                <span class="toggle-slider"></span>
+              </label>
+              <span style="font-size:14px;color:var(--fg-muted)">Show featured badge</span>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary-full">➕ Add Project to Portfolio</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MANAGE TAB -->
+  <div class="tab-panel" id="tab-manage">
+    <div id="projectsList"></div>
+  </div>
+
+  <!-- JSON GUIDE TAB -->
+  <div class="tab-panel" id="tab-json">
+    <div class="json-instructions">
+      <h3>📄 How to Add Projects via Code (projects-data.js)</h3>
+      <ol>
+        <li>Open the file <code>projects-data.js</code> in your editor</li>
+        <li>Copy the template below and paste it into the <code>PROJECTS_DATA</code> array</li>
+        <li>Fill in your project details and save the file</li>
+        <li>The project will appear automatically on the portfolio</li>
+      </ol>
+    </div>
+    <div class="json-section">
+      <div style="font-size:14px;font-weight:600;margin-bottom:10px;color:var(--fg-muted)">Project Template</div>
+      <div class="json-block">{
+  id: 7,                        // Unique number (increment from last)
+  title: "Your Project Name",
+  description: "A clear description of what the project does, the problem it solves, and key features. Keep it 2-3 sentences.",
+  image: "https://images.unsplash.com/photo-XXXX?w=800&q=80",
+  technologies: ["Django", "React", "PostgreSQL", "Docker"],
+  github: "https://github.com/oscarnyamosi/your-project",
+  demo: "https://your-project-demo.com",
+  featured: true   // Set to false if not featured
+}</div>
+    </div>
+    <div class="json-section" style="margin-top:24px">
+      <div style="font-size:14px;font-weight:600;margin-bottom:10px;color:var(--fg-muted)">Full projects-data.js Preview</div>
+      <div class="json-block" id="jsonPreview"></div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="projects-data.js"></script>
+<script>
+  // Tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+      if (tab.dataset.tab === 'manage') renderList();
+      if (tab.dataset.tab === 'json') renderJson();
+    });
+  });
+
+  function showToast(msg, error = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = error ? 'error show' : 'show';
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  function getStored() {
+    const s = localStorage.getItem('portfolio_projects');
+    return s ? JSON.parse(s) : [];
+  }
+
+  function saveStored(arr) {
+    localStorage.setItem('portfolio_projects', JSON.stringify(arr));
+  }
+
+  // Add project form
+  document.getElementById('projectForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const techs = document.getElementById('technologies').value.split(',').map(t => t.trim()).filter(Boolean);
+    if (techs.length === 0) { showToast('Please enter at least one technology.', true); return; }
+    const stored = getStored();
+    const maxId = Math.max(0, ...PROJECTS_DATA.map(p => p.id), ...stored.map(p => p.id));
+    const project = {
+      id: maxId + 1,
+      title: document.getElementById('title').value.trim(),
+      description: document.getElementById('description').value.trim(),
+      image: document.getElementById('image').value.trim() || 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80',
+      technologies: techs,
+      github: document.getElementById('github').value.trim(),
+      demo: document.getElementById('demo').value.trim() || document.getElementById('github').value.trim(),
+      featured: document.getElementById('featured').checked
+    };
+    stored.push(project);
+    saveStored(stored);
+    e.target.reset();
+    showToast('✅ Project added successfully!');
+  });
+
+  // Manage list
+  function renderList() {
+    const stored = getStored();
+    const all = [...PROJECTS_DATA.map(p => ({...p, _source: 'default'})), ...stored.map(p => ({...p, _source: 'custom'}))];
+    const listEl = document.getElementById('projectsList');
+    if (all.length === 0) {
+      listEl.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><p>No projects yet. Add your first one!</p></div>';
+      return;
+    }
+    listEl.innerHTML = '<div class="projects-list">' + all.map(p => `
+      <div class="project-list-item">
+        <img class="project-list-img" src="${p.image}" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80'" />
+        <div class="project-list-info">
+          <div class="project-list-title">${p.title} ${p.featured ? '⭐' : ''}</div>
+          <div class="project-list-techs">${p.technologies.join(' · ')}</div>
+          <div class="project-list-source">${p._source === 'default' ? '📁 Built-in project' : '✏️ Custom project'}</div>
+        </div>
+        <div class="project-list-actions">
+          ${p._source === 'custom' ? `<button class="btn btn-danger" onclick="deleteProject(${p.id})">🗑 Remove</button>` : '<span style="font-size:12px;color:var(--fg-muted)">Built-in</span>'}
+        </div>
+      </div>
+    `).join('') + '</div>';
+  }
+
+  function renderJson() {
+    const preview = document.getElementById('jsonPreview');
+    preview.textContent = JSON.stringify(PROJECTS_DATA, null, 2);
+  }
+
+  function deleteProject(id) {
+    if (!confirm('Remove this project from your portfolio?')) return;
+    const stored = getStored().filter(p => p.id !== id);
+    saveStored(stored);
+    renderList();
+    showToast('🗑️ Project removed.');
+  }
+</script>
+</body>
+</html>
