@@ -43,7 +43,7 @@ const PROJECTS_DATA = [
     id: 5,
     title: "Bakery Management System and Online Shop",
     description: "A comprehensive solution for managing a bakery business, including inventory control, order processing, and an online store for customers.",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    image: "https://res.cloudinary.com/dw0l7b86h/image/upload/v1779807655/hero_vfml9n.jpg",
     technologies: ["React", "D3.js", "AWS SDK", "WebSockets", "Django"],
     github: "https://github.com/oscarnyamosi1/benkizfrontend",
     demo: "https://benkiz.vercel.app",
