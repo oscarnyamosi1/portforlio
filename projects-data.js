@@ -25,12 +25,12 @@ const PROJECTS_DATA = [
     description: "A modern e-learning platform with course management, progress tracking, video lessons, quizzes, and certificate generation. Dark-mode UI with smooth animations.",
     image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&q=80",
     technologies: ["Django","React", "JavaScript", "CSS3", "SQLite", "Lipia-Api"],
-    github: "https://github.com/oscarnyamosi1",
-    demo: "https://github.com/oscarnyamosi",
+    github: "https://github.com/oscarnyamosi1/kenya_teaching_vacancies/",
+    demo: "https://kenyateachers.vercel.app",
     featured: false
   },
   {
-    id: 5,
+    id: 4,
     title: "FinTrack — Investment Dashboard",
     description: "A personal finance and investment tracking dashboard with portfolio analytics, transaction history, charts, and budget forecasting tools.",
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
@@ -40,13 +40,13 @@ const PROJECTS_DATA = [
     featured: true
   },
   {
-    id: 6,
+    id: 5,
     title: "Bakery Management System and Online Shop",
     description: "A comprehensive solution for managing a bakery business, including inventory control, order processing, and an online store for customers.",
     image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
     technologies: ["React", "D3.js", "AWS SDK", "WebSockets", "Django"],
-    github: "https://github.com/oscarnyamosi1",
-    demo: "https://github.com/oscarnyamosi",
+    github: "https://github.com/oscarnyamosi1/benkizfrontend",
+    demo: "https://benkiz.vercel.app",
     featured: false
   }
 ];
