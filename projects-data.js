@@ -7,7 +7,7 @@ const PROJECTS_DATA = [
     technologies: ["Django", "React", "PostgreSQL", "Docker", "AWS"],
     github: "https://github.com/oscarnyamosi1",
     demo: "https://github.com/oscarnyamosi",
-    featured: true
+    featured: false
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const PROJECTS_DATA = [
     technologies: ["Python", "Django", "React", "Leaflet.js", "REST API"],
     github: "https://github.com/oscarnyamosi1",
     demo: "https://github.com/oscarnyamosi",
-    featured: true
+    featured: false
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const PROJECTS_DATA = [
     technologies: ["Django","React", "JavaScript", "CSS3", "SQLite", "Lipia-Api"],
     github: "https://github.com/oscarnyamosi1/kenya_teaching_vacancies/",
     demo: "https://kenyateachers.vercel.app",
-    featured: false
+    featured: true
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ const PROJECTS_DATA = [
     technologies: ["React", "D3.js", "AWS SDK", "WebSockets", "Django"],
     github: "https://github.com/oscarnyamosi1/benkizfrontend",
     demo: "https://benkiz.vercel.app",
-    featured: false
+    featured: true
   }
 ];
 // {
